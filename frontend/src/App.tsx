@@ -4,6 +4,7 @@ import ContactInfo from './components/ContactInfo';
 import ComposeMessage from './components/ComposeMessage';
 
 const App: React.FC = () => {
+  
   return (
     <Router>
       <Routes>

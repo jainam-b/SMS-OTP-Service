@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Table,
   TableBody,
@@ -10,7 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Link } from 'react-router-dom';
 
 interface Contact {
   id: number;
@@ -26,10 +25,11 @@ const ContactsList: React.FC = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/contacts`);
+        const response = await axios.get(`otp-service-backend.vercel.app
+/api/contacts`);
         setContacts(response.data);
       } catch (error) {
-        console.error('Error fetching contacts:', error);
+        console.error("Error fetching contacts:", error);
       } finally {
         setLoading(false);
       }

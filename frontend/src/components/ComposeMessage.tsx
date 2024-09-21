@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogAction } from '@/components/ui/alert-dialog';
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 const NewMessage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [dialogMessage, setDialogMessage] = useState('');
+  const [dialogMessage, setDialogMessage] = useState("");
   const navigate = useNavigate();
 
   const generateOTP = () => {
@@ -19,22 +27,26 @@ const NewMessage: React.FC = () => {
 
   const handleSend = async () => {
     try {
-      const response = await axios.post(`http://localhost:3000/api/send-otp`, {
-        contactId: parseInt(id!),
-        customMessage: message,
-      });
-      setDialogMessage(response.data.message || 'Message sent successfully!');
+      const response = await axios.post(
+        `otp-service-backend.vercel.app
+/api/send-otp`,
+        {
+          contactId: parseInt(id!),
+          customMessage: message,
+        }
+      );
+      setDialogMessage(response.data.message || "Message sent successfully!");
       setIsDialogOpen(true);
     } catch (error) {
-      console.error('Error sending message:', error);
-      setDialogMessage('Failed to send message. Please try again.');
+      console.error("Error sending message:", error);
+      setDialogMessage("Failed to send message. Please try again.");
       setIsDialogOpen(true);
     }
   };
 
   const handleDialogClose = () => {
     setIsDialogOpen(false);
-    if (dialogMessage.includes('successfully')) {
+    if (dialogMessage.includes("successfully")) {
       navigate(`/contact/${id}`);
     }
   };
@@ -49,7 +61,9 @@ const NewMessage: React.FC = () => {
         className="mb-4"
       />
       <div className="flex space-x-2">
-        <Button onClick={generateOTP} variant="outline">Generate OTP</Button>
+        <Button onClick={generateOTP} variant="outline">
+          Generate OTP
+        </Button>
         <Button onClick={handleSend}>Send</Button>
       </div>
       <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -59,7 +73,9 @@ const NewMessage: React.FC = () => {
             <AlertDialogDescription>{dialogMessage}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={handleDialogClose}>OK</AlertDialogAction>
+            <AlertDialogAction onClick={handleDialogClose}>
+              OK
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
