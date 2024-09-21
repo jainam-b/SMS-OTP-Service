@@ -19,8 +19,7 @@ const ContactInfo: React.FC = () => {
   useEffect(() => {
     const fetchContact = async () => {
       try {
-        const response = await axios.get(`otp-service-backend.vercel.app
-/api/contacts/${id}`);
+        const response = await axios.get(`https://otp-service-backend.vercel.app/api/contacts/${id}`);
         setContact(response.data);
       } catch (error) {
         console.error('Error fetching contact:', error);

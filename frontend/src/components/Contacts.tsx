@@ -25,8 +25,7 @@ const ContactsList: React.FC = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await axios.get(`otp-service-backend.vercel.app
-/api/contacts`);
+        const response = await axios.get("https://otp-service-backend.vercel.app/api/contacts");
         setContacts(response.data);
       } catch (error) {
         console.error("Error fetching contacts:", error);

@@ -28,8 +28,7 @@ const NewMessage: React.FC = () => {
   const handleSend = async () => {
     try {
       const response = await axios.post(
-        `otp-service-backend.vercel.app
-/api/send-otp`,
+        "https://otp-service-backend.vercel.app/api/send-otp",
         {
           contactId: parseInt(id!),
           customMessage: message,
